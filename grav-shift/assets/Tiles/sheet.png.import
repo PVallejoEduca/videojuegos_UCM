@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c437hsjs6bw5c"
-path="res://.godot/imported/metalPlatform.png-7a63e6443c55fdf5096cce904945d965.ctex"
+uid="uid://krrv7w003k1m"
+path="res://.godot/imported/sheet.png-ec4cab3e8800823b3a554dfbfdb01e11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tiles/metalPlatform.png"
-dest_files=["res://.godot/imported/metalPlatform.png-7a63e6443c55fdf5096cce904945d965.ctex"]
+source_file="res://assets/Tiles/sheet.png"
+dest_files=["res://.godot/imported/sheet.png-ec4cab3e8800823b3a554dfbfdb01e11.ctex"]
 
 [params]
 
