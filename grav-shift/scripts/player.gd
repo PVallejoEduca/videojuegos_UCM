@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@onready var invert_sound = $InvertGravitySound
+@onready var death_sound = $DeathGravitySound
+
 @export var force = 2500
 @export var maxSpeed = 350
 @export var friction = 0.75
@@ -66,6 +69,10 @@ func _process(delta):
 func respawn():
     global_position = spawn_position
     velocity = Vector2.ZERO
+    
+    # Reproducir sonido de inversión de gravedad
+    if death_sound:
+        death_sound.play()
 
     # Si estaba invertido, volver a gravedad normal al reaparecer
     if gravity_direction == -1:
@@ -75,6 +82,10 @@ func respawn():
 
 
 func toggle_gravity():
+    # Reproducir sonido de inversión de gravedad
+    if invert_sound:
+        invert_sound.play()
+
     # Cambiamos la dirección de la gravedad
     gravity_direction *= -1
 
