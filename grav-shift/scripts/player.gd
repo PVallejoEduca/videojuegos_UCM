@@ -6,51 +6,83 @@ extends CharacterBody2D
 @export var gravity = 6000
 @export var jump_strength = -1000
 @export var fall_limit_y = 1500
-@export var invert_gravity = 1
+@export var top_limit_y = -200 
 
-var acceleartion = Vector2.ZERO
+var acceleration = Vector2.ZERO
 var spawn_position = Vector2.ZERO
+# 1 suelo abajo, -1 suelo arriba
+var gravity_direction := 1 
+
 
 func _ready():
     spawn_position = global_position
+    up_direction = Vector2.UP
 
 func _process(delta):
     var direction = Input.get_axis("left", "right")
-    acceleartion = Vector2(direction, 0) * force
-    
-    if is_on_floor():
-        acceleartion.y = 0
-    else:
-        acceleartion.y = gravity    
+    acceleration = Vector2(direction, 0) * force
 
-    if Input.is_action_just_pressed("jump") and is_on_floor():
-        velocity.y = jump_strength
-         
-    velocity += acceleartion * delta
+    # Invertir gravedad con la acción "invert_gravity" (barra espaciadora)
+    if Input.is_action_just_pressed("invert_gravity"):
+        toggle_gravity()
     
-    if abs(velocity.x)> maxSpeed:
+    # Gravedad según la dirección actual
+    if is_on_floor():
+        acceleration.y = 0
+    else:
+        acceleration.y = gravity * gravity_direction    
+
+    # Salto, siempre “alejándose del suelo”
+    if Input.is_action_just_pressed("jump") and is_on_floor():
+        velocity.y = jump_strength * gravity_direction
+         
+    # Movimiento horizontal + límites
+    velocity += acceleration * delta
+    
+    if abs(velocity.x) > maxSpeed:
         velocity.x = sign(velocity.x) * maxSpeed
-        
-    if acceleartion.length() < 0.05:
+
+    if acceleration.length() < 0.05:
         velocity.x *= friction
         
+    # Animaciones y giro horizontal
     if abs(velocity.x) > 0.05:
         if velocity.x < 0:
             $Sprite.scale.x = -1
-        if velocity.x > 0:
+        elif velocity.x > 0:
             $Sprite.scale.x = 1
         if is_on_floor():
             $Sprite.play("run")
-    elif  abs(velocity.x) < 0.05:
-        # No hay movimiento horizontal, paramos las piernas
+    else:
         $Sprite.stop()
         $Sprite.frame = 0
 
     move_and_slide()
     
-    if global_position.y > fall_limit_y:
+    # Límite de caída por abajo y por arriba
+    if global_position.y > fall_limit_y or global_position.y < top_limit_y:
         respawn()
 
 func respawn():
     global_position = spawn_position
     velocity = Vector2.ZERO
+
+    # Si estaba invertido, volver a gravedad normal al reaparecer
+    if gravity_direction == -1:
+        gravity_direction = 1
+        up_direction = Vector2.UP
+        $Sprite.scale.y = abs($Sprite.scale.y)
+
+
+func toggle_gravity():
+    # Cambiamos la dirección de la gravedad
+    gravity_direction *= -1
+
+    # Cambiamos la dirección "arriba" del CharacterBody2D
+    up_direction *= -1
+
+    # Volteamos el sprite en vertical para que quede boca abajo o al derecho
+    $Sprite.scale.y *= -1
+
+    # Opcional reset vertical para evitar tirones
+    velocity.y = 0
