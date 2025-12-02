@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3hy64hp3gof8"]
+[gd_scene load_steps=10 format=3 uid="uid://c3hy64hp3gof8"]
 
 [ext_resource type="Texture2D" uid="uid://bfwy8qwc54kny" path="res://assets/bg_nivel1.png" id="1_cmxnd"]
 [ext_resource type="PackedScene" uid="uid://cxpcjosx0keve" path="res://scenes/player.tscn" id="2_kwwa1"]
 [ext_resource type="Texture2D" uid="uid://krrv7w003k1m" path="res://assets/Tiles/sheet.png" id="3_77kw0"]
 [ext_resource type="PackedScene" uid="uid://xxh2e1p6nimu" path="res://scenes/Camera.tscn" id="4_ol31w"]
+[ext_resource type="Script" uid="uid://d4aw6wbm7v7up" path="res://scripts/level_exit.gd" id="5_kwwa1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wyf3"]
 texture = ExtResource("3_77kw0")
@@ -1434,7 +1435,8 @@ sources/0 = SubResource("TileSetAtlasSource_4wyf3")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wyf3"]
 size = Vector2(20, 485)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmxnd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77kw0"]
+size = Vector2(46, 52)
 
 [node name="World - Level 1" type="Node2D"]
 
@@ -1450,7 +1452,7 @@ scale = Vector2(3.6000001, 2.025)
 texture = ExtResource("1_cmxnd")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("2_kwwa1")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("2_kwwa1")]
 position = Vector2(83, -51)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -1471,6 +1473,11 @@ position = Vector2(14, 2)
 shape = SubResource("RectangleShape2D_4wyf3")
 
 [node name="LevelExit" type="Area2D" parent="."]
+script = ExtResource("5_kwwa1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
-shape = SubResource("RectangleShape2D_cmxnd")
+position = Vector2(2178.8125, 446.25)
+shape = SubResource("RectangleShape2D_77kw0")
+
+[connection signal="body_entered" from="LevelExit" to="LevelExit" method="_on_body_entered"]
+[connection signal="body_exited" from="LevelExit" to="LevelExit" method="_on_body_exited"]
