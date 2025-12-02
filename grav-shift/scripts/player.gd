@@ -14,7 +14,7 @@ extends CharacterBody2D
 var acceleration = Vector2.ZERO
 var spawn_position = Vector2.ZERO
 # 1 suelo abajo, -1 suelo arriba
-var gravity_direction := 1 
+var gravity_direction = 1 
 
 
 func _ready():
@@ -64,15 +64,15 @@ func _process(delta):
     
     # Límite de caída por abajo y por arriba
     if global_position.y > fall_limit_y or global_position.y < top_limit_y:
+         # Reproducir sonido de inversión de gravedad
+        if death_sound:
+            death_sound.play()
         respawn()
 
 func respawn():
     global_position = spawn_position
     velocity = Vector2.ZERO
     
-    # Reproducir sonido de inversión de gravedad
-    if death_sound:
-        death_sound.play()
 
     # Si estaba invertido, volver a gravedad normal al reaparecer
     if gravity_direction == -1:

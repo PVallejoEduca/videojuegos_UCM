@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cxpcjosx0keve"]
+[gd_scene load_steps=43 format=3 uid="uid://cxpcjosx0keve"]
 
 [ext_resource type="Script" uid="uid://b1lb6x0ccfk3c" path="res://scripts/player.gd" id="1_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://crw4rupqeinf" path="res://assets/Player/Run/0001.png" id="1_oprun"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://6p1hncsvh2yd" path="res://assets/Player/Death/0149.png" id="36_74r1k"]
 [ext_resource type="Texture2D" uid="uid://cix8a5a6121k1" path="res://assets/Player/Death/0150.png" id="37_8svfe"]
 [ext_resource type="AudioStream" uid="uid://dk6ybuxscx75c" path="res://audio/invert_gravity_sound.wav" id="38_t4otl"]
+[ext_resource type="AudioStream" uid="uid://c2jvjasrnyduo" path="res://audio/death_sound.wav" id="39_j2b1d"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wqfne"]
 animations = [{
@@ -195,3 +196,4 @@ frame_progress = 1.0
 stream = ExtResource("38_t4otl")
 
 [node name="DeathGravitySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("39_j2b1d")
