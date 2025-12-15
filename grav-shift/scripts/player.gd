@@ -75,6 +75,9 @@ func _process(delta):
 
     # Caer fuera de pantalla sigue siendo muerte instantánea sin animación extra
     if not is_dead and (global_position.y > fall_limit_y or global_position.y < top_limit_y):
+        # Sonido de muerte si existe el nodo
+        if death_sound:
+            death_sound.play()
         respawn()
 
 func respawn():

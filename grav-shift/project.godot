@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GravShift"
-run/main_scene="uid://cxpcjosx0keve"
+run/main_scene="uid://nkq2x14872rq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [input]

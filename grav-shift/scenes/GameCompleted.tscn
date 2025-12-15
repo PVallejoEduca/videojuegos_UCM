@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://nkq2x14872rq"]
+
+[ext_resource type="Texture2D" uid="uid://dnrey00dx5dqm" path="res://assets/game_completed_bg.png" id="1_b0i7e"]
+[ext_resource type="Script" uid="uid://bvdatxerkb0ak" path="res://scripts/game_completed.gd" id="1_lrqjj"]
+[ext_resource type="Texture2D" uid="uid://ndvfvsnylh1v" path="res://assets/logo_gravshift_0.png" id="3_tftxg"]
+[ext_resource type="AudioStream" uid="uid://bl0bp11sk5igm" path="res://audio/L1_musica_fondo_Plank.mp3" id="4_tftxg"]
+
+[node name="GameCompleted" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lrqjj")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -84.0
+offset_top = -10.0
+offset_right = 1290.0
+offset_bottom = 677.0
+texture = ExtResource("1_b0i7e")
+expand_mode = 3
+
+[node name="VBoxMain" type="BoxContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = -20.0
+offset_right = 151.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+vertical = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxMain"]
+layout_mode = 2
+texture = ExtResource("3_tftxg")
+stretch_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxMain"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="VBoxMain/Buttons"]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.011764706, 0.69411767, 0.73333335, 1)
+theme_override_font_sizes/font_size = 24
+text = "Empezar a jugar"
+
+[node name="QuitButton" type="Button" parent="VBoxMain/Buttons"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Salir"
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tftxg")
+volume_db = -20.0
+autoplay = true
