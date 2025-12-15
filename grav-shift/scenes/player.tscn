@@ -165,13 +165,12 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 30.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_a8ls1")
-jump_strength = -1500
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -189,8 +188,6 @@ shape = SubResource("CapsuleShape2D_qfm1y")
 visible = false
 position = Vector2(3, 0)
 sprite_frames = SubResource("SpriteFrames_2a3c5")
-frame = 20
-frame_progress = 1.0
 
 [node name="InvertGravitySound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("38_t4otl")
