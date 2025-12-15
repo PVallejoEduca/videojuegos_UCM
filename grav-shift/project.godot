@@ -14,6 +14,10 @@ config/name="GravShift"
 run/main_scene="uid://nkq2x14872rq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 left={

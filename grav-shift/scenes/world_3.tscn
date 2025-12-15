@@ -1528,11 +1528,11 @@ region_enabled = true
 region_rect = Rect2(141.47717, 350.0653, 68.49179, 71.0683)
 
 [node name="LevelMessage" type="Label" parent="LevelExit"]
-offset_left = 2087.0
-offset_top = 517.0
-offset_right = 2236.0
-offset_bottom = 540.0
-text = "Nivel 1 completado"
+offset_left = 2425.0
+offset_top = 339.0
+offset_right = 2574.0
+offset_bottom = 362.0
+text = "Nivel 3 completado"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
