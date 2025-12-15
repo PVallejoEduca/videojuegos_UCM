@@ -18,10 +18,10 @@ script = ExtResource("1_lrqjj")
 layout_mode = 0
 offset_left = -84.0
 offset_top = -10.0
-offset_right = 1290.0
-offset_bottom = 677.0
+offset_right = 1386.0
+offset_bottom = 766.0
 texture = ExtResource("1_b0i7e")
-expand_mode = 3
+stretch_mode = 5
 
 [node name="VBoxMain" type="BoxContainer" parent="."]
 clip_contents = true
