@@ -25,7 +25,7 @@ func _ready():
     death_anim.visible = false
 
 func _process(delta):
-    # Si está en animación de muerte, no aceptamos input
+    # Miriendo, no hay inputs
     if is_dead:
         move_and_slide()
         return
@@ -33,7 +33,7 @@ func _process(delta):
     var direction = Input.get_axis("left", "right")
     acceleration = Vector2(direction, 0) * force
 
-    # Invertir gravedad con la acción "invert_gravity" (barra espaciadora)
+    # Invertir gravedad
     if Input.is_action_just_pressed("invert_gravity"):
         toggle_gravity()
     
@@ -70,12 +70,12 @@ func _process(delta):
 
     move_and_slide()
 
-    # Comprobar si hemos chocado con un hazard (pinchos, sierras, etc)
+    # Comprobar si hemos chocado con un pinchos, laseres, sierras, etc
     check_hazard_collisions()
 
-    # Caer fuera de pantalla sigue siendo muerte instantánea sin animación extra
+    # Caer fuera de pantalla (Por abajo o por arriba)
     if not is_dead and (global_position.y > fall_limit_y or global_position.y < top_limit_y):
-        # Sonido de muerte si existe el nodo
+        # Sonido de muerte
         if death_sound:
             death_sound.play()
         respawn()
@@ -84,7 +84,7 @@ func respawn():
     global_position = spawn_position
     velocity = Vector2.ZERO
 
-    # Reset gravedad a normal
+    # Resetear gravedad a normal
     if gravity_direction == -1:
         gravity_direction = 1
         up_direction = Vector2.UP
@@ -101,7 +101,7 @@ func respawn():
     sprite.frame = 0
 
 func toggle_gravity():
-    # Reproducir sonido de inversión de gravedad
+    # Sonido de inversión de gravedad
     if invert_sound:
         invert_sound.play()
 
@@ -121,7 +121,7 @@ func check_hazard_collisions() -> void:
         var collider = collision.get_collider()
         if collider and collider.is_in_group("hazard"):
             die_on_hazard()
-            return    # con una vez basta
+            return   
 
 func die_on_hazard() -> void:
     if is_dead:
@@ -130,7 +130,7 @@ func die_on_hazard() -> void:
     is_dead = true
     velocity = Vector2.ZERO
 
-    # Sonido de muerte si existe el nodo
+    # Sonido de muerte
     if death_sound:
         death_sound.play()
 
@@ -143,7 +143,7 @@ func die_on_hazard() -> void:
 
     # Reproducir animación de muerte y esperar a que termine
     if death_anim.sprite_frames:
-        death_anim.play() # usa la animación "default"
+        death_anim.play() 
         await death_anim.animation_finished
 
     # Al terminar la animación, respawn
